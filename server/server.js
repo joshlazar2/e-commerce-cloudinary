@@ -12,7 +12,7 @@ require('dotenv').config();
 
 app.use(express.json(), express.urlencoded({ extended: true }));
 
-app.use(cors({credentials:true, origin:'http://localhost:3000'}));
+app.use(cors({credentials:true, origin:'https://shopiyo-site.onrender.com'}));
 
 app.use(cookieParser());
 
