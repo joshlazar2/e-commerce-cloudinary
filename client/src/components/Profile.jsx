@@ -43,7 +43,9 @@ const Profile = () => {
                 <h2 className='mt-8 font-bold text-blue-500'>Profile</h2>
                 <div className='bg-white rounded-2xl p-6 md:p-16 shadow-xl space-y-8'>
                     <div className='flex justify-center space-x-10'>
-                        <button class='bg-blue-500 text-white p-4 rounded-lg hover:shadow-lg hover:bg-blue-700 font-bold' onClick={logoutUser}>Logout</button>
+                        {
+                            user ? <button class='bg-blue-500 text-white p-4 rounded-lg hover:shadow-lg hover:bg-blue-700 font-bold' onClick={logoutUser}>Logout</button> : <Link to={'/'}><button class='bg-blue-500 text-white p-4 rounded-lg hover:shadow-lg hover:bg-blue-700 font-bold'>Login</button></Link>
+                        }
                         {
                             user.owner ?
                             <Link to={'/addProduct'}><button className='bg-blue-500 text-white p-4 rounded-lg hover:shadow-lg hover:bg-blue-700 font-bold'>Add Product</button></Link>:
