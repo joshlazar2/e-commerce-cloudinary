@@ -4,13 +4,15 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 
 const OneCategory = () => {
 
+    const backendUrl = process.env.REACT_APP_BACKEND_URL
+
     const { category } = useParams()
 
     const [categoryProducts, setCategoryProducts] = useState([])
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/api/oneCategory/${category}`)
+            .get(`${backendUrl}/api/oneCategory/${category}`)
             .then((res) => {
                 setCategoryProducts(res.data)
             })

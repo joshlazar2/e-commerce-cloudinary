@@ -4,11 +4,13 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const Home = () => {
 
+    const backendUrl = process.env.REACT_APP_BACKEND_URL
+
     const [featuredProducts, setFeaturedProdcuts] = useState([])
 
     useEffect(() => {
         axios
-            .get('http://localhost:8000/api/featuredProducts')
+            .get(`${backendUrl}/api/featuredProducts`)
             .then((res) => {
                 //console.log(res)
                 setFeaturedProdcuts(res.data)

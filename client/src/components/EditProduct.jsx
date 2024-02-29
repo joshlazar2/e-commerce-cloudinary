@@ -4,6 +4,8 @@ import {useNavigate, useParams} from 'react-router-dom';
 
 const EditProduct = () => {
 
+    const backendUrl = process.env.REACT_APP_BACKEND_URL
+
     const navigate = useNavigate();
 
     const {id} = useParams()
@@ -20,7 +22,7 @@ const EditProduct = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/api/oneProduct/${id}`)
+            .get(`${backendUrl}/api/oneProduct/${id}`)
             .then((res) => {
                 setProduct(res.data)
             })
@@ -55,7 +57,7 @@ const EditProduct = () => {
         formData.append('featured', product.featured);
         formData.append('image', product.image);
         axios
-            .post(`http://localhost:8000/api/editProduct/${id}`, formData, {withCredentials:true})
+            .post(`${backendUrl}/api/editProduct/${id}`, formData, {withCredentials:true})
             .then((res) => {
                 navigate(`/oneProduct/${id}`);
             })

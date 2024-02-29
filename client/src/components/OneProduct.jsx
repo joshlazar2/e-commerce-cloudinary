@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../features/cart/cartSlice';
 
 const OneProduct = () => {
+    const backendUrl = process.env.REACT_APP_BACKEND_URL
     const navigate = useNavigate();
     const [product, setProduct] = useState({});
     const { id } = useParams();
@@ -15,7 +16,7 @@ const OneProduct = () => {
 
     useEffect(() => {
         axios
-            .get('http://localhost:8000/api/findUserInfo', {withCredentials:true})
+            .get(`${backendUrl}/api/findUserInfo`, {withCredentials:true})
             .then((res) => {
                 setUser(res.data)
             })
@@ -26,7 +27,7 @@ const OneProduct = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/api/oneProduct/${id}`)
+            .get(`${backendUrl}/api/oneProduct/${id}`)
             .then((res) => {
                 //console.log(res);
                 setProduct(res.data);
@@ -45,7 +46,7 @@ const OneProduct = () => {
 
     const deleteHandler = () => {
         axios
-            .delete(`http://localhost:8000/api/deleteProduct/${id}`, { withCredentials: true })
+            .delete(`${backendUrl}/api/deleteProduct/${id}`, { withCredentials: true })
             .then((res) => {
                 console.log(res)
                 navigate('/home')

@@ -4,6 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
 
+    const backendUrl = process.env.REACT_APP_BACKEND_URL
+
     const navigate = useNavigate();
 
     const [user, setUser] = useState({
@@ -31,7 +33,7 @@ const Register = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         axios
-            .post('http://localhost:8000/api/register', user, { withCredentials: true })
+            .post(`${backendUrl}/api/register`, user, { withCredentials: true })
             .then((res) => {
                 console.log(res)
                 navigate('/home')

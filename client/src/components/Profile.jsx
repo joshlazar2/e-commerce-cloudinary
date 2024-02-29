@@ -6,6 +6,8 @@ import { resetCart } from '../features/cart/cartSlice';
 
 const Profile = () => {
 
+    const backendUrl = process.env.REACT_APP_BACKEND_URL
+
     const navigate = useNavigate();
 
     const dispatch = useDispatch()
@@ -14,7 +16,7 @@ const Profile = () => {
 
     useEffect(() => {
         axios
-            .get('http://localhost:8000/api/findUserInfo', {withCredentials:true})
+            .get(`${backendUrl}/api/findUserInfo`, {withCredentials:true})
             .then((res) => {
                 setUser(res.data)
             })
@@ -25,7 +27,7 @@ const Profile = () => {
 
     const logoutUser = () => {
         axios
-            .post('http://localhost:8000/api/logout', {}, {withCredentials:true})
+            .post(`${backendUrl}/api/logout`, {}, {withCredentials:true})
             .then((res) => {
                 dispatch(resetCart());
                 navigate('/')

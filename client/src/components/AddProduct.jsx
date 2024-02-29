@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
 
+    const backendUrl = process.env.REACT_APP_BACKEND_URL
+
     const navigate = useNavigate();
 
     const [product, setProduct] = useState({
@@ -42,7 +44,7 @@ const AddProduct = () => {
         formData.append('featured', product.featured);
         formData.append('image', product.image);
         axios
-            .post('http://localhost:8000/api/createProduct', formData, {withCredentials:true})
+            .post(`${backendUrl}/api/createProduct`, formData, {withCredentials:true})
             .then((res) => {
                 // Assuming the response contains the Cloudinary URL in res.data.image
                 // You might want to update the product state with this URL or handle it as needed

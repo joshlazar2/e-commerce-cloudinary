@@ -4,13 +4,15 @@ import { useNavigate, Link } from 'react-router-dom';
 
 const Categories = () => {
 
+    const backendUrl = process.env.REACT_APP_BACKEND_URL
+
     const [products, setProducts] = useState([])
 
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
         axios
-            .get('http://localhost:8000/api/allProducts')
+            .get(`${backendUrl}/api/allProducts`)
             .then((res) => {
                 setProducts(res.data)
                 const uniqueCategories = [...new Set(res.data.map((product) => product.category))]
