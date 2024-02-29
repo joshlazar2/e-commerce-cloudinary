@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 //                                          only need to change the db name
-mongoose.connect('mongodb://127.0.0.1:27017/ecommerce-site-cloudinary', {
+
+const uri = process.env.MONGODB_URI
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
