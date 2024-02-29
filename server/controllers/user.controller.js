@@ -21,7 +21,12 @@ module.exports = {
                 const userToken = jwt.sign({_id: newUser._id, email: newUser.email}, secret, {expiresIn:'2h'})
                 
                 // sending user data back to the client
-                res.status(201).cookie('userToken', userToken, {httpOnly:true, maxAge:2 * 60 * 60 * 1000 /* 2 hours in milliseconds */}).json({ _id: newUser._id, email: newUser.email });
+                res.status(201).cookie('userToken', userToken, {
+                    httpOnly: true,
+                    maxAge: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
+                    secure: true, // Set to true if your site is served over HTTPS
+                    sameSite: 'none' // Allows the cookie to be sent with cross-origin requests
+                }).json({ _id: newUser._id, email: newUser.email });
             }
         }
         catch(err){
@@ -40,7 +45,12 @@ module.exports = {
                     // generate our userToken 
                     const userToken = jwt.sign({_id: user._id, email: user.email}, secret, {expiresIn:'2h'})
                     // log the user in
-                    res.status(201).cookie('userToken', userToken, {httpOnly:true, maxAge:2 * 60 * 60 * 1000}).json({ _id: user._id, email: user.email });
+                    res.status(201).cookie('userToken', userToken, {
+                        httpOnly: true,
+                        maxAge: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
+                        secure: true, // Set to true if your site is served over HTTPS
+                        sameSite: 'none' // Allows the cookie to be sent with cross-origin requests
+                    }).json({ _id: user._id, email: user.email });
                 }
                 else{
                     // if email does exist but incorrect password
