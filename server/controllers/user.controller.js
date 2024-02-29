@@ -68,7 +68,11 @@ module.exports = {
     },
 
     logoutUser: (req, res) => {
-        res.clearCookie('userToken').json({message: 'You have logged out'})
+        res.clearCookie('userToken', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        }).json({message: 'You have logged out'})
     },
 
     findUserInfo: async (req, res) => {
