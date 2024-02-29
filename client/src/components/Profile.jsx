@@ -16,7 +16,7 @@ const Profile = () => {
 
     useEffect(() => {
         axios
-            .get(`${backendUrl}/api/findUserInfo`)
+            .get(`${backendUrl}/api/findUserInfo`, {withCredentials:true})
             .then((res) => {
                 setUser(res.data)
             })
