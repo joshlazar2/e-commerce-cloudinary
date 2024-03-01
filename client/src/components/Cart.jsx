@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useSelector} from 'react-redux'
 import {useDispatch} from 'react-redux'
+import { Link } from 'react-router-dom';
 import { updateQuantity, removeFromCart } from '../features/cart/cartSlice';
 
 const Cart = () => {
+
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        axios
+            .get(`${backendUrl}/api/findUserInfo`, {withCredentials:true})
+            .then((res) => {
+                setUser(res.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [])
+
     const dispatch = useDispatch()
 
     const cart = useSelector(state => state.items);
@@ -40,7 +55,9 @@ const Cart = () => {
                         ))
                     }
                     <div>
-                        <button className='bg-blue-500 hover:bg-blue-700 rounded-lg hover:shadow-lg text-white font-bold w-60 p-2'>Checkout</button>
+                        {
+                            user.firstName ? <button className='bg-blue-500 hover:bg-blue-700 rounded-lg hover:shadow-lg text-white font-bold w-60 p-2'>Checkout</button> : <Link to={'/'}><button className='bg-blue-500 hover:bg-blue-700 rounded-lg hover:shadow-lg text-white font-bold w-60 p-2'>Login</button></Link>
+                        }
                     </div>
                 </div>
             </div>
