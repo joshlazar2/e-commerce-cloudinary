@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {useSelector} from 'react-redux'
 import {useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom';
 import { updateQuantity, removeFromCart } from '../features/cart/cartSlice';
 
 const Cart = () => {
+
+    const backendUrl = process.env.REACT_APP_BACKEND_URL
 
     const [user, setUser] = useState({})
 
